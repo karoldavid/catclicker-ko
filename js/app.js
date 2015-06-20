@@ -1,15 +1,11 @@
 var IMG_PATH = 'img/';
 var nicknames = [{name: 'Berry'}, {name: 'Lolo'}, {name: 'Anni'}, {name: 'Tutti'}, {name: 'Hegi'}];
 
-// controlflow-structure for nicknames array
-
-var ViewModel = function() {
-	this.clickCount = ko.observable(0);
+var Cat = function() {
+    this.clickCount = ko.observable(0);
 	this.name = ko.observable('Tabby');
 	this.imgSrc = ko.observable(IMG_PATH + 'kitten-1.jpg');
-	this.incrementCounter = function() {
-		this.clickCount(this.clickCount() + 1);
-	}
+	
 	this.title = ko.computed(function() {
       return this.name() + ": " + this.clickCount();
 	}, this);
@@ -32,6 +28,14 @@ var ViewModel = function() {
 	for (var n in nicknames) {
 		this.nickname.push(nicknames[n].name);
 	}
+};
+
+var ViewModel = function() {
+    this.currentCat = ko.observable(new Cat());
+
+	this.incrementCounter = function() {
+		this.clickCount(this.clickCount() + 1);
+	};	
 };
 
 ko.applyBindings(new ViewModel());
