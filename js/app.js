@@ -1,17 +1,15 @@
 var IMG_PATH = 'img/';
 var nicknames = [{name: 'Berry'}, {name: 'Lolo'}, {name: 'Anni'}, {name: 'Tutti'}, {name: 'Hegi'}];
 
-var Cat = function() {
-    this.clickCount = ko.observable(0);
-	this.name = ko.observable('Tabby');
-	this.imgSrc = ko.observable(IMG_PATH + 'kitten-1.jpg');
-	
-	this.title = ko.computed(function() {
-      return this.name() + ": " + this.clickCount();
-	}, this);
+var initialCats = cats.kittens;
 
-	this.level = ko.computed(function() {
-		var catLevel = ['Newborn', 'Infant', 'Teen', 'Adult'],
+var Cat = function(data) {
+    this.clickCount = ko.observable(data.clickCount);
+	this.name = ko.observable(data.name);
+	this.imgSrc = ko.observable(IMG_PATH + data.imgSrc);
+
+	this.title = ko.computed(function() {
+		var catLevel = ['Newborn', 'Infant', 'Child', 'Teen', 'Adult', 'Elderly'],
 		    max = catLevel.length - 1,
 		    i = 0;
         
@@ -23,16 +21,22 @@ var Cat = function() {
 
 	}, this);
 
-	this.nickname = ko.observableArray();
+	this.nicknames = ko.observableArray();
 
-	for (var n in nicknames) {
-		this.nickname.push(nicknames[n].name);
+	for (var name in data.nicknames) {
+		this.nicknames.push(data.nicknames[name]);
 	}
 };
 
 var ViewModel = function() {
 	var self = this;
-    this.currentCat = ko.observable(new Cat());
+	this.catList = ko.observableArray();
+
+	initialCats.forEach(function(catItem) {
+        self.catList.push(new Cat(catItem));
+	});
+
+    this.currentCat = ko.observable(this.catList()[0]);
 
 	this.incrementCounter = function() {
 		self.currentCat().clickCount(self.currentCat().clickCount() + 1);
