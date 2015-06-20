@@ -7,6 +7,24 @@ var ViewModel = function() {
 	this.incrementCounter = function() {
 		this.clickCount(this.clickCount() + 1);
 	}
+	this.title = ko.computed(function() {
+      return this.name() + ": " + this.clickCount();
+	}, this);
+
+	this.level = ko.computed(function() {
+		var catLevel = ['Newborn', 'Infant', 'Teen', 'Adult'],
+		    length = catLevel.length,
+		    i = 0;
+        
+        i = Math.floor(this.clickCount() / 10);
+
+        if (i > (length -1)) {
+        	i = length -1;
+        }
+
+		return catLevel[i];
+
+	}, this);
 };
 
 ko.applyBindings(new ViewModel());
