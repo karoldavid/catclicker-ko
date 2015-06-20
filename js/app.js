@@ -1,4 +1,7 @@
 var IMG_PATH = 'img/';
+var nicknames = [{name: 'Berry'}, {name: 'Lolo'}, {name: 'Anni'}, {name: 'Tutti'}, {name: 'Hegi'}];
+
+// controlflow-structure for nicknames array
 
 var ViewModel = function() {
 	this.clickCount = ko.observable(0);
@@ -13,18 +16,22 @@ var ViewModel = function() {
 
 	this.level = ko.computed(function() {
 		var catLevel = ['Newborn', 'Infant', 'Teen', 'Adult'],
-		    length = catLevel.length,
+		    max = catLevel.length - 1,
 		    i = 0;
         
         i = Math.floor(this.clickCount() / 10);
 
-        if (i > (length -1)) {
-        	i = length -1;
-        }
+        if (i > max) { i = max; }
 
 		return catLevel[i];
 
 	}, this);
+
+	this.nickname = ko.observableArray();
+
+	for (var n in nicknames) {
+		this.nickname.push(nicknames[n].name);
+	}
 };
 
 ko.applyBindings(new ViewModel());
