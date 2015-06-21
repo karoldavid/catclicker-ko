@@ -1,3 +1,9 @@
+/* jshint ignore:start */
+"use strict";
+/* jshint ignore:end */
+
+$(function(cats) {
+
 var IMG_PATH = 'img/';
 var nicknames = [{name: 'Berry'}, {name: 'Lolo'}, {name: 'Anni'}, {name: 'Tutti'}, {name: 'Hegi'}];
 
@@ -47,3 +53,5 @@ var ViewModel = function() {
 };
 
 ko.applyBindings(new ViewModel());
+
+}(cats));
