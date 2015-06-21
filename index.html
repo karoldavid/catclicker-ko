@@ -1,38 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cat Clicker App">
+  <meta name="author" content="Karol Zyskowski">
   <title>Cat Clicker</title>
-  <link rel="stylesheet" href="css/style.css">
+  <base target="_blank">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Architects+Daughter">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-
+ 
 <body>
+  <header>
+    <h1>Cat Clicker Premium Deluxe</h1><p>MEOW IS THE ONLY WAY</p>
+  </header>
 
-  <div>
-    <ul data-bind="foreach: catList">
-      <li data-bind="click: $parent.setCurrentCat, text: $data.name"></li>
-    </ul>
-    
-    <div data-bind="with: currentCat">
-      <h2 data-bind="text: name"></h2>
-      <p data-bind="text: title"></p>
-    
-      <div data-bind="text: clickCount"></div>
-
-      <img src="" alt="cute cat" data-bind="click: $parent.incrementCounter, 
-      attr: {src: imgSrc}">
-
-      <div>
-        <h3>Nicknames:</h3>
-
-        <ul data-bind="foreach: nicknames">
-    	  <li data-bind="text: $data"></li>
+  <div class="flex-container">
+    <div class="row">
+      <div class="item-1">
+        <ul data-bind="foreach: catList">
+          <li data-bind="click: $parent.setCurrentCat, text: $data.name"></li>
         </ul>
-
       </div>
 
+      <div data-bind="with: currentCat">
+        <div class="item-2">
+          <h2 data-bind="text: name"></h2>
+          <p data-bind="text: title"></p>
+    
+          <div data-bind="text: clickCount"></div>
+
+          <img src="" alt="cute cat" data-bind="click: $parent.incrementCounter, 
+          attr: {src: imgSrc}">
+        </div>
+        
+        <div class="item-3">
+          <h3>Nicknames:</h3>
+
+          <ul data-bind="foreach: nicknames">
+    	    <li data-bind="text: $data"></li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
+
+  <footer>
+   <div class="contact">
+     <a href="mailto:k.zysk@zoho.com" target="_self" title="email me">&#9993;</a>
+   </div>
+
+  </footer>
 	
   <script src="js/lib/knockout-3.3.0.js"></script>
   <script src="js/data.js"></script>
